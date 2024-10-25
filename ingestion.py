@@ -1,5 +1,3 @@
-import os
-
 import openmeteo_requests
 import requests_cache
 import pandas as pd
@@ -8,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 import logging
 import argparse
 
-from constants import CONFIG_PATH, TABLE_NAME, CITIES, SCHEMA_NAME
+from utility.constants import CONFIG_PATH, TABLE_NAME, CITIES, SCHEMA_NAME
 from utility.utils import load_config, get_database_engine, get_db_connection_string
 
 # Set up logging

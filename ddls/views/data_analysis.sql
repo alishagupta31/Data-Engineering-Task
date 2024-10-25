@@ -1,3 +1,4 @@
+create view weather_data.cloud_cover_report as
 SELECT
     city_name,
     EXTRACT(YEAR FROM date) AS year,

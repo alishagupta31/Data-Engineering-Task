@@ -1,13 +1,3 @@
--- CREATING TABLE CITIES
-CREATE TABLE cities (
-    city_name VARCHAR(100) primary key,
-    latitude FLOAT,
-    longitude FLOAT
-);
-
--- select * from cities;
-
-
 -- CREATING TABLE CLOUD COVER DATA
 CREATE TABLE cloud_cover_data (
 	city_name VARCHAR(100),
@@ -20,8 +10,3 @@ CREATE TABLE cloud_cover_data (
     FOREIGN KEY (city_name) REFERENCES cities(city_name)
 );
 
--- select * from cloud_cover_data;
-
-
---select count(*) from cloud_cover_data ;
---select count(*) from cities ;

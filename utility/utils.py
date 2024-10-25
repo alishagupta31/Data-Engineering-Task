@@ -4,7 +4,7 @@ import os
 import yaml
 from sqlalchemy import create_engine
 
-from constants import DATABASE, DB_CONNECTION_URL, DB_USERNAME, DB_PASSWORD
+from utility.constants import DATABASE, DB_CONNECTION_URL, DB_USERNAME, DB_PASSWORD
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
