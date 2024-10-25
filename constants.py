@@ -1,4 +1,4 @@
-DB_CONNECTION_URL = "postgresql+psycopg2://alisha:1234ABCD@localhost:5432/postgres"  # Replace with your credentials
+DB_CONNECTION_URL = "db_connection_url"
 
 CITIES = {
     "London": {"latitude": 51.5074, "longitude": -0.1278},
@@ -12,3 +12,5 @@ SCHEMA_NAME = 'schema_name'
 DATABASE = "database"
 CONFIG_PATH = "config_path"
 TABLE_NAME = "table_name"
+DB_USERNAME = "DB_USERNAME"
+DB_PASSWORD = "DB_PASSWORD"

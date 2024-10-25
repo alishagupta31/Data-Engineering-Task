@@ -1,3 +1,5 @@
+import os
+
 import openmeteo_requests
 import requests_cache
 import pandas as pd
@@ -6,8 +8,8 @@ from sqlalchemy.exc import IntegrityError
 import logging
 import argparse
 
-from constants import DATABASE, SCHEMA_NAME, CONFIG_PATH, TABLE_NAME, CITIES, DB_CONNECTION_URL
-from utility.utils import load_config, get_database_engine
+from constants import CONFIG_PATH, TABLE_NAME, CITIES, SCHEMA_NAME
+from utility.utils import load_config, get_database_engine, get_db_connection_string
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -74,7 +76,7 @@ def process_cloud_cover_data(openmeteo, cities, engine, schema_name, table_name)
             cloud_cover_data_list.append(pd.DataFrame(data=hourly_data))
 
         except Exception as e:
-            logger.error(f"Error processing data for {city_name}: {e}")
+            logger.error(f"Error processing data for city_name: {city_name}: {e}")
 
     # Combine all DataFrames into one and insert into database
     if cloud_cover_data_list:
@@ -86,28 +88,32 @@ def process_cloud_cover_data(openmeteo, cities, engine, schema_name, table_name)
         except IntegrityError:
             logger.warning("Cloud cover data already exists in the database.")
 
+
 def main(config_path):
     # Load configuration
     config = load_config(config_path)
+    logger.info(f"Loaded configuration: {config}")
 
-    # Database connection
-    db_connection_url = config[DATABASE]['db_connection_url']
-    cities = config['cities']
+    # Replace placeholders with environment variables
+    db_connection_url = get_db_connection_string(config)
+
+    # Accessing cities and table_name
+    cities_data = config['cloud_cover_data']['cities']
+    table_name = config['cloud_cover_data'][TABLE_NAME]  # Accessing the new table name structure
     schema_name = config[SCHEMA_NAME]
-    table_name = cities[TABLE_NAME]  # Get table name from config
 
     # Create database engine using the new function
-    engine = get_database_engine(DB_CONNECTION_URL)
+    engine = get_database_engine(db_connection_url)
 
     create_cities_table(engine, schema_name)
 
-    # Setup the Open-Meteo API client with cache and retry
+    # Set up the Open-Meteo API client with cache and retry
     logger.info("Setting up the Open-Meteo API client with cache and retry...")
     cache_session = requests_cache.CachedSession('.cache', expire_after=-1)
     retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
     openmeteo = openmeteo_requests.Client(session=retry_session)
 
-    process_cloud_cover_data(openmeteo, cities, engine, schema_name, table_name)
+    process_cloud_cover_data(openmeteo, cities_data, engine, schema_name, table_name)
 
 if __name__ == "__main__":
     # Argument parser to get config path from command line
