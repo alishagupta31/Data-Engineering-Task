@@ -1,5 +1,5 @@
 -- CREATING TABLE CLOUD COVER DATA
-CREATE TABLE cloud_cover_data (
+CREATE TABLE weather_data.cloud_cover_data (
 	city_name VARCHAR(100),
     date Timestamp,
     cloud_cover FLOAT,
