@@ -75,6 +75,16 @@ To run the project, execute the following command in your terminal:
 python ingestion.py --config_path path/to/your/config.yaml
 ```
 
+# How to run tests
+```
+python -m pytest tests/
+```
+
+# How to check test coverage
+```
+python -m pytest tests/ --cov=ingestion --cov-report html
+```
+
 ### 6. Analyzing the Data
 
 You can query the `Cloud_cover_report` view in DBeaver.
