@@ -1,0 +1,22 @@
+database:
+  db_connection_url: "postgresql+psycopg2://alisha:1234ABCD@localhost:5432/postgres"
+
+cities:
+  table_name: "cloud_cover_data"  # Defining the table name as a parent to cities
+  London:
+    latitude: 51.5074
+    longitude: -0.1278
+    start_date: "2012-01-01"
+    end_date: "2022-12-31"
+  Amsterdam:
+    latitude: 52.3676
+    longitude: 4.9041
+    start_date: "2012-06-01"
+    end_date: "2022-12-31"
+  Lisbon:
+    latitude: 38.7223
+    longitude: -9.1393
+    start_date: "2012-01-01"
+    end_date: "2022-12-31"
+
+schema_name: "weather_data"
