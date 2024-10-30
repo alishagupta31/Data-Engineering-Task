@@ -6,8 +6,7 @@ CITIES = {
     "Lisbon": {"latitude": 38.7223, "longitude": -9.1393},
 }
 
-START_DATE = "2012-01-01"
-END_DATE = "2022-12-31"
+
 SCHEMA_NAME = 'schema_name'
 DATABASE = "database"
 CONFIG_PATH = "config_path"
