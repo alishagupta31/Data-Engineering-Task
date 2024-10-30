@@ -12,7 +12,7 @@ cloud_cover_data:  # This replaces 'cities'
     Amsterdam:
       latitude: 52.3676
       longitude: 4.9041
-      start_date: "2012-06-01"
+      start_date: "2012-01-01"
       end_date: "2022-12-31"
     Lisbon:
       latitude: 38.7223
